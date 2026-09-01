@@ -1,0 +1,99 @@
+/* rev-a2b81d-20260901 agent-config.json */
+{
+  "agent": {
+    "id": "default",
+    "name": "Hermes Agent",
+    "description": "Default Hermes autonomous agent powered by Nous Research Hermes models",
+    "systemPrompt": "You are Hermes, an autonomous AI agent developed by Nous Research. You can use tools to complete tasks. Think step by step, plan carefully, and execute actions one at a time. Always report your reasoning before taking actions.",
+    "maxIterations": 20,
+    "tools": ["filesystem", "terminal", "websearch", "browser"],
+    "memory": {
+      "enabled": true,
+      "maxTokens": 8192,
+      "persistAcrossSessions": true,
+      "vectorSearchEnabled": false,
+      "maxMessages": 100
+    }
+  },
+  "model": {
+    "provider": "ollama",
+    "model": "hermes3:7b",
+    "baseUrl": "http://localhost:11434",
+    "temperature": 0.7,
+    "maxTokens": 4096,
+    "contextWindow": 8192,
+    "topP": 0.9
+  },
+  "providers": {
+    "ollama": {
+      "enabled": true,
+      "baseUrl": "http://localhost:11434",
+      "defaultModel": "hermes3:7b"
+    },
+    "openai": {
+      "enabled": false,
+      "baseUrl": "https://api.openai.com/v1",
+      "defaultModel": "gpt-4o"
+    },
+    "anthropic": {
+      "enabled": false,
+      "baseUrl": "https://api.anthropic.com",
+      "defaultModel": "claude-3-5-sonnet-20241022"
+    },
+    "google": {
+      "enabled": false,
+      "defaultModel": "gemini-1.5-pro"
+    },
+    "xai": {
+      "enabled": false,
+      "baseUrl": "https://api.x.ai/v1",
+      "defaultModel": "grok-2"
+    }
+  },
+  "tools": {
+    "filesystem": {
+      "enabled": true,
+      "allowedPaths": ["~/Documents", "~/Desktop", "~/Downloads"],
+      "blockedPaths": ["/System", "/Windows", "C:\\Windows"],
+      "maxFileSizeBytes": 10485760
+    },
+    "terminal": {
+      "enabled": true,
+      "shell": "auto",
+      "timeoutSeconds": 30,
+      "requireConfirmation": true,
+      "blockedCommands": ["rm -rf /", "format", "del /f /s /q C:\\"]
+    },
+    "websearch": {
+      "enabled": true,
+      "engine": "duckduckgo",
+      "maxResults": 5,
+      "safesearch": true
+    },
+    "browser": {
+      "enabled": true,
+      "headless": true,
+      "timeoutSeconds": 30,
+      "userAgent": "Mozilla/5.0 (compatible; HermesAgent/0.9)"
+    }
+  },
+  "gateway": {
+    "enabled": false,
+    "port": 11435,
+    "host": "127.0.0.1",
+    "requireAuth": false
+  },
+  "ui": {
+    "theme": "dark",
+    "language": "en",
+    "sidebarWidth": 280,
+    "streamTokens": true,
+    "showTokenCount": true,
+    "showAgentTrace": true
+  },
+  "ollama": {
+    "baseUrl": "http://localhost:11434",
+    "autoStart": false,
+    "modelFallbackChain": ["hermes4:8b", "hermes3:7b"]
+  }
+}
